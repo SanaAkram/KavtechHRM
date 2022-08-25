@@ -27,42 +27,22 @@ class QuizQuestion(APIView):
 
 
 class UserSubView(APIView):
-    # renderer_classes = [UserRenderer]
-    # permission_classes = [IsAuthenticated]
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        data = request.data
-        test_data = [
-           UserSubmittedAnswerSerializer(
-            user_fk=data['user_fk'],
-            question=data['question'],
-            submitted_ans=data['submitted_ans']
-        )]
-        UserSubmittedAnswerSerializer.bulk_create(test_data)
-        # ##################################
-        # UserSubmittedAnswer.objects.bulk_create({
-        #     "user_fk": data['user_fk'],
-        #     "question": data['question'],
-        #     "submitted_ans": data['submitted_ans']
-        #
-        # }, batch_size = None)
-
-        # ##################################
-
-        # data = request.data
-        # test_data = {
-        #     "user_fk": data['user_fk'],
-        #     "question": data['question'],
-        #     "submitted_ans": data['submitted_ans']
-        #
-        # }
-        serializer = UserSubmittedAnswerSerializer(data=test_data)
+        test = request.test
+        test_data = {
+            "user_fk": test['user_fk'],
+            "score": test['score'],
+        }
+        serializer = UserSubmittedAnswerSerializer(test=test_data)
         serializer.is_valid(raise_exception=True)
         test = serializer.save()
         return Response(
             # serializer.data, status=status.HTTP_200_OK
             {
-                "test": UserSubmittedAnswerSerializer(test).data,
+                "test": UserSubmittedAnswerSerializer(test).test,
 
             }
         )

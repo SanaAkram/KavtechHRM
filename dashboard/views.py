@@ -12,13 +12,16 @@ from rest_framework import generics
 from .serializers import ProjectSerializer, SprintSerializer, ClientSerializer
 from rest_framework.views import APIView
 
+
 # Create your views here.
 class ProjectView(APIView):
     def get(self, request, format=None, **kwargs):
         project = Project.objects.all()
         serializer = ProjectSerializer(project, many=True)
         return Response(serializer.data)
-#error: AssertionError at /Kavtech/dashboard/projects/'ProjectView' should either include a `queryset` attribute, or override the `get_queryset()` method.
+
+
+# error: AssertionError at /Kavtech/dashboard/projects/'ProjectView' should either include a `queryset` attribute, or override the `get_queryset()` method.
 
 
 class SprintView(APIView):

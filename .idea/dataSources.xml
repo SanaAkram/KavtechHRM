@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="kavHRM@localhost" uuid="e27931ed-d798-4c9f-b675-0792e114b775">
+    <data-source source="LOCAL" name="kavHRM" uuid="2f23e9e5-0455-47a6-b36a-12b13a025b86">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/KavtechHRM/settings.py</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/kavHRM</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/kavHRM</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

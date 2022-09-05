@@ -7,16 +7,23 @@ from rest_framework.views import APIView
 from account.renderers import UserRenderer
 from rest_framework.permissions import IsAuthenticated
 import account
+from rest_framework import viewsets
 from account.models import UserProfile
 from . import models
 from .models import Quizzes, Question, Category, UserSubmittedAnswer
-from .serializers import QuestionSerializer, UserSubmittedAnswerSerializer, \
-    QuizzesSerializer
+from .serializers import QuestionSerializer, UserSubmittedAnswerSerializer, QuizzesSerializer, CategorySerializer
 
 
 class Quiz(generics.ListAPIView):
     serializer_class = QuizzesSerializer
     queryset = Quizzes.objects.all()
+
+
+class CategoryView(generics.ListAPIView):
+    def get(self, request, format=None, **kwargs):
+        queryset = Category.objects.all()
+        serializer = CategorySerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class QuizQuestion(APIView):

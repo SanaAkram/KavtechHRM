@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'account',
-    'quiz'
+    'quiz',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -177,3 +178,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+

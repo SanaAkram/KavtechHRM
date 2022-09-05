@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return self.name

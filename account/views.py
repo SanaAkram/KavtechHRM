@@ -2,12 +2,15 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from account.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, UserPasswordResetSerializer, UserProfileSerializer, UserRegistrationSerializer
+from account.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, \
+    UserPasswordResetSerializer, EditUserSerializer, UserProfileSerializer, UserRegistrationSerializer
 from django.contrib.auth import authenticate
 from account.renderers import UserRenderer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import make_password, check_password
+from .models import User
+from django.core import serializers
 
 
 # Generate Token Manually
@@ -46,6 +49,7 @@ class UserLoginView(APIView):
             else:
                 return Response({'errors': {'non_field_errors': ['Email or Password is not Valid']}},
                                 status=status.HTTP_404_NOT_FOUND)
+
 
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
@@ -107,3 +111,58 @@ class UserPasswordResetView(APIView):
         serializer = UserPasswordResetSerializer(data=request.data, context={'uid': uid, 'token': token})
         serializer.is_valid(raise_exception=True)
         return Response({'msg': 'Password Reset Successfully'}, status=status.HTTP_200_OK)
+
+
+# For HR to view all resources details
+class ResourceView(APIView):
+    def get(self, request, format=None, **kwargs):
+        resources = User.objects.values(
+            'id',
+            'email',
+            'first_name',
+            'last_name',
+            'phone_number',
+            'residence_city',
+            'gender',
+            'marital_status',
+            'DOB',
+            'NIC',
+            'passport_no',
+            'passport_expiry',
+            'blood_group',
+            'cnic_img',
+            'emp_photo',
+            'job_title',
+            'dnt',
+            'joinig_department',
+            'leaving_date',
+            'hiring_comments',
+            'email',
+            'current_salary',
+        )
+        return Response(resources)
+
+
+class UserEditView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        # if request.data:
+        data = request.data
+        try:
+            userobj = User.objects.filter(pk=pk).update(**data)
+            if userobj:
+                return Response(
+                    # serializer.data, status=status.HTTP_200_OK
+                    {'msg': 'User Data Updated Successfully'}, status=status.HTTP_200_OK
+                )
+
+        except Exception as e:
+            return Response("User not found in Database")
+        # if userobj:
+        #     return Response(
+        #         # serializer.data, status=status.HTTP_200_OK
+        #         {'msg': 'User Data Updated Successfully'}, status=status.HTTP_200_OK
+        #     )
+        # return Response(serializer.errors)

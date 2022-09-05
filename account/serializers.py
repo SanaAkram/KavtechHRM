@@ -22,7 +22,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         serializer.is_valid(raise_exception=True)
 
         if request.method == 'POST':
-            data = request.data
             email = request.data['email']
             name = request.data['name']
             password = request.data['password']
@@ -63,6 +62,49 @@ class UserChangePasswordSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
         return attrs
+
+
+class EditUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields =[
+            # 'email',
+            'name', 'password',
+            # 'is_admin',
+            # 'user_type',
+            'first_name',
+            'last_name',
+            'father_name',
+            'gender',
+            'marital_status',
+            'DOB',
+            'NIC',
+            'passport_no',
+            'passport_expiry',
+            'blood_group',
+            'cnic_img',
+            'emp_photo',
+            'job_title',
+            'dnt',
+            'joinig_department',
+            # 'leaving_date',
+            'hiring_comments',
+            'email',
+            # 'kav_email',
+            'current_salary',
+            # 'is_active',
+            'leaving_reason',
+            'starting_salary',
+            'emp_agreement_image',
+            'offer_letter_img',
+            'NDA_letter_img',
+            # 'username',
+            'password',
+            # 'last_modified_date',
+            # 'last_login',
+            # 'is_virtual',
+            'residence_city',
+        ]
 
 
 class SendPasswordResetEmailSerializer(serializers.Serializer):

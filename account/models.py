@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from passlib.hash import pbkdf2_sha256
 from cryptography.fernet import Fernet
-#  Custom User Manager
 from django.db.models import options
 
 
@@ -48,13 +47,42 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    type_fk = models.ForeignKey('dashboard.UserType', on_delete=models.CASCADE, related_name='Usertype')
     name = models.CharField(max_length=200)
-
+    first_name = models.CharField(max_length=15, null=True)
+    last_name = models.CharField(max_length=15, null=True)
+    phone_number = models.CharField(max_length=15, null=True)
+    father_name = models.CharField(max_length=20, null=True)
+    gender = models.CharField(max_length=6, null=True)
+    marital_status = models.CharField(max_length=20, null=True)
+    DOB = models.DateField(max_length=20, null=True)
+    NIC = models.CharField(max_length=20, null=True)
+    passport_no = models.CharField(max_length=20, null=True)
+    passport_expiry = models.DateField(max_length=20, null=True)
+    blood_group = models.CharField(max_length=5, null=True)
+    cnic_img = models.CharField(max_length=50, null=True)
+    emp_photo = models.CharField(max_length=20, null=True)
+    job_title = models.CharField(max_length=20, null=True)
+    dnt = models.CharField(max_length=20, null=True)
+    joinig_department = models.DateField(max_length=20, null=True)
+    leaving_date = models.DateField(max_length=20, null=True)
+    hiring_comments = models.CharField(max_length=20, null=True)
+    gmail = models.EmailField(max_length=50, null=True)
+    current_salary = models.IntegerField(null=True)
+    leaving_reason = models.CharField(max_length=200, null=True)
+    starting_salary = models.IntegerField(null=True)
+    emp_agreement_image = models.CharField(max_length=50)
+    offer_letter_img = models.CharField(max_length=50)
+    NDA_letter_img = models.BooleanField(max_length=50, null=True)
+    password = models.CharField(max_length=200, null=True)
+    last_modified_date = models.DateTimeField(max_length=20, null=True)
+    last_login = models.DateTimeField(max_length=20, null=True)
+    is_virtual = models.BooleanField(default=False)
+    residence_city = models.CharField(max_length=20, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -104,3 +132,5 @@ class UserProfile(models.Model):
 
     def __self__(self):
        return "self.first_name"
+
+

@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5f434ba-eead-488f-a218-719de79da4be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dashboard/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dashboard/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/renderers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard_2/renderers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard_2/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard_2/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard_2/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard_2/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e27931ed-d798-4c9f-b675-0792e114b775.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e27931ed-d798-4c9f-b675-0792e114b775/storage_v2/_src_/database/kavHRM.oy4kvA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e27931ed-d798-4c9f-b675-0792e114b775/storage_v2/_src_/database/kavHRM.oy4kvA/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e27931ed-d798-4c9f-b675-0792e114b775/storage_v2/_src_/database/kavHRM.oy4kvA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e27931ed-d798-4c9f-b675-0792e114b775/storage_v2/_src_/database/kavHRM.oy4kvA/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +31,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="category" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -41,15 +54,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dashboard" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sanaa\PycharmProjects\KavHRM_backend\dashboard" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sanaa\PycharmProjects\KavHRM_backend\dashboard" />
     </key>
   </component>
-  <component name="RunManager" selected="Django Server.KavHRM_backend">
+  <component name="RunManager" selected="Python.Kavtech_HRM">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="KavHRM_backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,7 +121,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662379868872</updated>
-      <workItem from="1662379871180" duration="676000" />
+      <workItem from="1662379871180" duration="6515000" />
+      <workItem from="1662450602422" duration="1401000" />
+      <workItem from="1662461647751" duration="788000" />
+      <workItem from="1662463131822" duration="131000" />
+      <workItem from="1662477082069" duration="10546000" />
+      <workItem from="1662530871000" duration="1365000" />
+      <workItem from="1662532300164" duration="5854000" />
     </task>
     <task id="LOCAL-00001" summary="employee_update">
       <created>1662380349434</created>
@@ -113,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662380349434</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="employee_update">
+      <created>1662380723301</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1662380723301</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,15 +154,7 @@
     <MESSAGE value="employee_update" />
     <option name="LAST_COMMIT_MESSAGE" value="employee_update" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/KavHRM_backend$Kavtech_HRM.coverage" NAME="Kavtech_HRM Coverage Results" MODIFIED="1662536385892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

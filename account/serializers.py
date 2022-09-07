@@ -1,20 +1,23 @@
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import serializers
 from account.models import User, UserProfile
 from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth import authenticate
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     # We are writing this because we need confirm password field in our Registration Request
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    confirm_password = serializers.CharField(style={'input_type': 'confirm_password'}, write_only=True)
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'password']
+        fields = ['email', 'name', 'password', 'confirm_password']
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'confirm_password': {'write_only': True}
         }
 
     def create_user(self, request):
@@ -25,14 +28,16 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             email = request.data['email']
             name = request.data['name']
             password = request.data['password']
-            enc_password = make_password(password)
-            user = User.objects.create_user(
-                name=name,
-                email=email,
-                password=enc_password,
+            confirm_password = request.data['confirm_password']
+            if password == confirm_password:
+                enc_password = make_password(password)
+                user = User.objects.create_user(
+                    name=name,
+                    email=email,
+                    password=enc_password,
 
-            )
-            return user
+                )
+                return user
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
@@ -50,26 +55,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   'm_degree', 'm_institute', 'phd_degree', 'phd_institute', 'birth_date', 'sched_test', 'user_fk']
 
 
-class UserChangePasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(max_length=255, style={'input_type': 'password'}, write_only=True)
-
-    class Meta:
-        fields = ['password']
-
-    def validate(self, attrs):
-        password = attrs.get('password')
-        user = self.context.get('user')
-        user.set_password(password)
-        user.save()
-        return attrs
-
-
 class EditUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields =[
+        fields = [
             # 'email',
-            'name', 'password',
+            'name',
+            'password',
             # 'is_admin',
             # 'user_type',
             'first_name',
@@ -107,6 +99,16 @@ class EditUserSerializer(serializers.ModelSerializer):
         ]
 
 
+class UserChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+        Serializer for password change endpoint.
+        """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+
 class SendPasswordResetEmailSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=255)
 
@@ -121,7 +123,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
             print('Encoded UID', uid)
             token = PasswordResetTokenGenerator().make_token(user)
             print('Password Reset Token', token)
-            link = 'http://localhost:3000/api/user/reset/' + uid + '/' + token
+            link = 'http://localhost:3000/Kavtech/reset/' + uid + '/' + token
             print('Password Reset Link', link)
             # Send EMail
             body = 'Click Following Link to Reset Your Password ' + link

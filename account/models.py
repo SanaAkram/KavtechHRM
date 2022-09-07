@@ -2,9 +2,9 @@ from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from passlib.hash import pbkdf2_sha256
-from cryptography.fernet import Fernet
-from django.db.models import options
-
+from django.contrib.auth.hashers import (
+    PBKDF2PasswordHasher, MD5PasswordHasher,
+)
 
 class UserManager(BaseUserManager):
 
@@ -39,6 +39,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def encode(self, password, salt, iterations=None):
+        _, _, md5_hash = MD5PasswordHasher().encode(password, salt).split('$', 2)
+        return self.encode_md5_hash(md5_hash, salt, iterations)
 
 #  Custom User Model
 class User(AbstractBaseUser):
@@ -47,7 +50,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    type_fk = models.ForeignKey('dashboard.UserType', on_delete=models.CASCADE, related_name='Usertype')
+    type_fk = models.ForeignKey('dashboard.UserType', on_delete=models.CASCADE, related_name='Usertype', default=1)
     name = models.CharField(max_length=200)
     first_name = models.CharField(max_length=15, null=True)
     last_name = models.CharField(max_length=15, null=True)

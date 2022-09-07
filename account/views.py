@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import generics
 from rest_framework.views import APIView
 from account.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, \
     UserPasswordResetSerializer, EditUserSerializer, UserProfileSerializer, UserRegistrationSerializer
@@ -85,14 +86,38 @@ class UserProfileView(APIView):
             })
 
 
-class UserChangePasswordView(APIView):
+class UserChangePasswordView(generics.UpdateAPIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, format=None):
-        serializer = UserChangePasswordSerializer(data=request.data, context={'user': request.user})
-        serializer.is_valid(raise_exception=True)
-        return Response({'msg': 'Password Changed Successfully'}, status=status.HTTP_200_OK)
+    serializer_class = UserChangePasswordSerializer
+    model = User
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SendPasswordResetEmailView(APIView):
@@ -160,9 +185,3 @@ class UserEditView(APIView):
 
         except Exception as e:
             return Response("User not found in Database")
-        # if userobj:
-        #     return Response(
-        #         # serializer.data, status=status.HTTP_200_OK
-        #         {'msg': 'User Data Updated Successfully'}, status=status.HTTP_200_OK
-        #     )
-        # return Response(serializer.errors)

@@ -1,8 +1,4 @@
-from django.contrib.auth.hashers import make_password
 from django.db import models
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from passlib.hash import pbkdf2_sha256
 
 
 # Create your models here.
